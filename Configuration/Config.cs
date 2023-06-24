@@ -14,7 +14,9 @@ namespace NoteLimiter.Configuration
 		{
 			All,
 			Cardinal,
-			Diagonal,
+			Diagonal, 
+			Horizontal, 
+			Vertical,
 			Up,
 			Down,
 			Left,

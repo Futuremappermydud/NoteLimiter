@@ -6,7 +6,7 @@ namespace NoteLimiter.HarmonyPatches
 	[HarmonyPatch(typeof(NoteJump), "Init")]
 	public class NoteJumpPatch
 	{
-		public static NoteCutDirection GetCardinalDirection(NoteCutDirection currentCutDirection)
+		public static NoteCutDirection GetCardinalCutDirection(NoteCutDirection currentCutDirection)
 		{
 			switch (currentCutDirection)
 			{
@@ -29,7 +29,7 @@ namespace NoteLimiter.HarmonyPatches
 
 			return currentCutDirection;
 		}
-		public static NoteCutDirection GetDirectionalDirection(NoteCutDirection currentCutDirection)
+		public static NoteCutDirection GetDiagonalCutDirection(NoteCutDirection currentCutDirection)
 		{
 			switch (currentCutDirection)
 			{
@@ -52,6 +52,58 @@ namespace NoteLimiter.HarmonyPatches
 					return currentCutDirection;
 			}
 		}
+		public static NoteCutDirection GetHorizontalDirection(NoteCutDirection currentCutDirection)
+		{
+			switch (currentCutDirection)
+			{
+				case NoteCutDirection.Any:
+					return NoteCutDirection.Any;
+				case NoteCutDirection.Up:
+					return NoteCutDirection.Left;
+				case NoteCutDirection.Down:
+					return NoteCutDirection.Right;
+				case NoteCutDirection.Left:
+					return NoteCutDirection.Left;
+				case NoteCutDirection.Right:
+					return NoteCutDirection.Right;
+				case NoteCutDirection.UpLeft:
+					return NoteCutDirection.Left;
+				case NoteCutDirection.UpRight:
+					return NoteCutDirection.Right;
+				case NoteCutDirection.DownLeft:
+					return NoteCutDirection.Left;
+				case NoteCutDirection.DownRight:
+					return NoteCutDirection.Right;
+				default:
+					return currentCutDirection;
+			}
+		}
+		public static NoteCutDirection GetVerticalDirection(NoteCutDirection currentCutDirection)
+		{
+			switch (currentCutDirection)
+			{
+				case NoteCutDirection.Any:
+					return NoteCutDirection.Any;
+				case NoteCutDirection.Up:
+					return NoteCutDirection.Up;
+				case NoteCutDirection.Down:
+					return NoteCutDirection.Down;
+				case NoteCutDirection.Left:
+					return NoteCutDirection.Up;
+				case NoteCutDirection.Right:
+					return NoteCutDirection.Down;
+				case NoteCutDirection.UpLeft:
+					return NoteCutDirection.Up;
+				case NoteCutDirection.UpRight:
+					return NoteCutDirection.Up;
+				case NoteCutDirection.DownLeft:
+					return NoteCutDirection.Down;
+				case NoteCutDirection.DownRight:
+					return NoteCutDirection.Down;
+				default:
+					return currentCutDirection;
+			}
+		}
 		public static NoteCutDirection GetNewDirection(Config.LimitType limitType, NoteCutDirection currentCutDirection)
 		{
 			switch (limitType)
@@ -59,9 +111,13 @@ namespace NoteLimiter.HarmonyPatches
 				case Config.LimitType.All:
 					return currentCutDirection;
 				case Config.LimitType.Cardinal:
-					return GetCardinalDirection(currentCutDirection);
+					return GetCardinalCutDirection(currentCutDirection);
 				case Config.LimitType.Diagonal:
-					return GetDirectionalDirection(currentCutDirection);
+					return GetDiagonalCutDirection(currentCutDirection);
+				case Config.LimitType.Horizontal:
+					return GetHorizontalDirection(currentCutDirection);
+				case Config.LimitType.Vertical:
+					return GetVerticalDirection(currentCutDirection);
 				case Config.LimitType.Up:
 					return NoteCutDirection.Up;
 				case Config.LimitType.Down:
