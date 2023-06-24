@@ -1,0 +1,9 @@
+﻿<bg xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance' 
+	xsi:schemaLocation='https://monkeymanboy.github.io/BSML-Docs/ https://raw.githubusercontent.com/monkeymanboy/BSML-Docs/gh-pages/BSMLSchema.xsd'
+	>
+	<vertical vertical-fit="PreferredSize" >
+    <toggle-setting text='Enabled' apply-on-change='true' value='enabled' bind-value='true'></toggle-setting>
+    <dropdown-list-setting text='Left Note Limit' value='left-limit' choices='available-limits' bind-value='true' apply-on-change='true'/>
+    <dropdown-list-setting text='Right Note Limit' value='right-limit' choices='available-limits' bind-value='true' apply-on-change='true'/>
+  </vertical>
+</bg>
